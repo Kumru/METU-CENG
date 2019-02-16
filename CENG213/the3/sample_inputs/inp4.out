@@ -1,0 +1,128 @@
+User Add: Sarah 1
+User Add: Morgan 1
+User Add: Ellie 1
+User Add: Vicky 1
+User Add: Casey 1
+User Add: Vale 1
+User Add: Devon 1
+User Add: Chuck 1
+User Add: Orion 1
+User Add: BigMike 1
+User Add: Jeff 1
+User Add: Lester 1
+Login: Chuck 1
+Logout: Chuck 1
+---------
+Active Users
+EMPTY
+EMPTY
+DELETED
+
+Login: Chuck 1
+---------
+Active Users
+EMPTY
+EMPTY
+Chuck
+
+Login: Morgan 1
+Login: Sarah 1
+Logout: Sarah 1
+---------
+Active Users
+EMPTY
+EMPTY
+EMPTY
+Morgan
+Chuck
+DELETED
+EMPTY
+
+Logout: Chuck 1
+Logout: Chuck 0
+Logout: Morgan 1
+Logout: Morgan 0
+Login: Sarah 1
+Login: Casey 1
+Login: Vicky 1
+Login: Vale 1
+Login: Orion 1
+Login: Jefster 0
+Login: BigMike 1
+Login: Jeff 1
+Login: Lester 1
+---------
+Active Users
+BigMike
+Vale
+Sarah
+EMPTY
+EMPTY
+Jeff
+EMPTY
+Casey
+Vicky
+Orion
+EMPTY
+Lester
+EMPTY
+EMPTY
+EMPTY
+EMPTY
+EMPTY
+Logout: Sarah 1
+Logout: Casey 1
+Logout: Sarah 0
+---------
+Active Users
+BigMike
+Vale
+DELETED
+EMPTY
+EMPTY
+Jeff
+EMPTY
+DELETED
+Vicky
+Orion
+EMPTY
+Lester
+EMPTY
+EMPTY
+EMPTY
+EMPTY
+EMPTY
+
+Logout: Orion 1
+Logout: Jefster 0
+Logout: BigMike 1
+Logout: Jeff 1
+Logout: Lester 1
+Logout: Vicky 1
+Logout: Vale 1
+Login: BigMike 1
+Login: Jeff 1
+Login: Lester 1
+Logout: BigMike 1
+Logout: Jeff 1
+Logout: Lester 1
+---------
+Active Users
+DELETED
+DELETED
+DELETED
+EMPTY
+EMPTY
+DELETED
+EMPTY
+DELETED
+DELETED
+DELETED
+EMPTY
+DELETED
+EMPTY
+EMPTY
+EMPTY
+EMPTY
+EMPTY
+

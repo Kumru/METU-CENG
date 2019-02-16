@@ -1,0 +1,56 @@
+User Add: Sarah 1
+User Add: Morgan 1
+User Add: Ellie 1
+User Add: Vicky 1
+User Add: Casey 1
+User Add: Vale 1
+User Add: Devon 1
+User Add: Chuck 1
+User Add: Orion 1
+User Add: BigMike 1
+User Add: Jeff 1
+User Add: Lester 1
+Login: Chuck 1
+Login: Chuck 0
+Login: Morgan 0
+Login: Morgan 1
+Login: Morgan 0
+Login: Sarah 0
+---------
+Active Users
+EMPTY
+EMPTY
+EMPTY
+Morgan
+Chuck
+EMPTY
+EMPTY
+
+Login: Sarah 1
+Login: Sarah 0
+Login: Casey 1
+Login: Orion 1
+Login: Jefster 0
+Login: BigMike 1
+Login: Jeff 1
+Login: Lester 1
+---------
+Active Users
+Morgan
+Chuck
+Sarah
+EMPTY
+EMPTY
+Jeff
+EMPTY
+EMPTY
+Casey
+Orion
+EMPTY
+Lester
+EMPTY
+EMPTY
+EMPTY
+EMPTY
+BigMike
+

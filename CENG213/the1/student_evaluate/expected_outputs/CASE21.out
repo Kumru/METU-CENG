@@ -1,0 +1,13 @@
+Friends of userName284
+username:userName127,name:name127,surname:surname127,Status:active
+username:userName051,name:name051,surname:surname051,Status:active
+
+Friends of userName127
+username:userName284,name:name284,surname:surname284,Status:active
+
+After removal of 284-127 friendship
+Friends of userName284
+username:userName051,name:name051,surname:surname051,Status:active
+
+Friends of userName127
+

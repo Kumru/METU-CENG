@@ -1,0 +1,16 @@
+Friends of userName200
+username:userName265,name:name265,surname:surname265,Status:active
+username:userName284,name:name284,surname:surname284,Status:active
+username:userName051,name:name051,surname:surname051,Status:active
+
+Friends of userName284
+username:userName051,name:name051,surname:surname051,Status:active
+username:userName265,name:name265,surname:surname265,Status:active
+username:userName200,name:name200,surname:surname200,Status:active
+
+AFTER DELETE
+Friends of userName200
+Friends of userName284
+username:userName051,name:name051,surname:surname051,Status:active
+username:userName265,name:name265,surname:surname265,Status:active
+
