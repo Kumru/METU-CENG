@@ -3,6 +3,6 @@
 
 ### Course Names and Environments
 
-CEng213 - Data Structures: **C++** 
-CEng223 - Discrete Mathematics: **LaTeX** 
-CEng232 - Digital Design: **Logisim** 
+* [CEng213 - Data Structures:](https://github.com/cahity/METU-CENG/tree/master/CENG213) **C++**
+* [CEng223 - Discrete Mathematics:](https://github.com/cahity/METU-CENG/tree/master/CENG223) **LaTeX**
+* [CEng232 - Digital Design:](https://github.com/cahity/METU-CENG/tree/master/CENG232/) **Logisim**
