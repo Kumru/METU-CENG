@@ -1,5 +1,6 @@
 ## METU-CENG
 ### CEng Homeworks After 2nd Year
+Sadly, I have deleted first year's works.
 
 ### Course Names and Environments
 
