@@ -1,6 +1,6 @@
 ## METU-CENG
 ### CEng Homeworks After 2nd Year
-Sadly, I have deleted first year's works.
+Sadly, I have deleted first year's files which included work done using Python and ANSI C.
 
 ### Course Names and Environments
 
