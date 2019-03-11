@@ -1,0 +1,9 @@
+write Expression:
+
+((ASTNode "plus" (ASTNode "num" (ASTNode "333" EmptyAST EmptyAST) EmptyAST) (ASTNode "num" (ASTNode "667" EmptyAST EmptyAST) EmptyAST)), [])
+
+((ASTNode "times" (ASTNode "plus" (ASTNode "num" (ASTNode "333" EmptyAST EmptyAST) EmptyAST) (ASTNode "num" (ASTNode "667" EmptyAST EmptyAST) EmptyAST)) (ASTNode "y" EmptyAST EmptyAST)), [("y", "num", "14")])
+
+((ASTNode "cat" (ASTNode "a" EmptyAST EmptyAST) (ASTNode "b" EmptyAST EmptyAST)), [("a", "str", "hello_"), ("b", "str", "world!")])
+
+((ASTNode "negate" ((ASTNode "len" (ASTNode "cat" (ASTNode "str" (ASTNode "C" EmptyAST EmptyAST) EmptyAST) (ASTNode "str" (ASTNode "Eng" EmptyAST EmptyAST) EmptyAST)) EmptyAST)) EmptyAST), [])
