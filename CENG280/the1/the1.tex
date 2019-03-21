@@ -26,50 +26,165 @@
 \section*{Student Information} 
 % Write your full name and id number between the colon and newline
 % Put one empty space character after colon and before newline
-Full Name :  \\
-Id Number :  \\
+Full Name :  Yaşar Cahit Yıldırım\\
+Id Number :  2310647\\
 
 % Write your answers below the section tags
 \section*{Answer 1}
+\qquad First let's examine the given sets.\\
+$A_k$ is finite since there are $2^{k+1}-1$ words in it.\\
+$B$ \ is countably infinite, because we can enumerate words by their lengths.\\
+$C$ \ is uncountably infinite by Cantor's diagonalization theorem.
 
 \subsection*{a.}
-
+\qquad $a_{280}$ is a finite set and $B$ is a countably infinite set, so their union is countably infinite. Since $C$ is uncountably infinite and the difference of an uncountably infinite set with a countably infinite set is uncountably infinite too. So this set is \textbf{uncountably infinite}.
 \subsection*{b.}
-
+\qquad $C$ is the powerset of all the words that can be written with alphabet $\{0, 1\}$ so intersection of any set on this alphabet with $C$ is the set itself. $A_7$ contains all the words with length $|w|\geq7$ and its cardinality is $2^8-1$. $B^*$ is in any length so in order to take its intersection with $A$ it is sufficient to just look words that are shorter than $8$. This starts with empty string and counting its possibilities with multiple $0$'s at the start and various ends after the $01$ part gives us $2^7-7$ words. Since this set is smaller that $A_7$ we can take this as our result. The answer is \textbf{finite} with cardinality $\boldsymbol{2^7-7}$.
 \subsection*{c.}
-
+\qquad Since $C$ is the powerset of $\{0, 1\}^*$ it includes all of its subsets. And union of all these subsets gives us $\{0, 1\}^*$ again. $A_2 \times B$ is a set of tuples, so there is no intersection of it with $\bigcup C$. The difference operator does not change anything and the answer is $|\{0, 1\}^*|$ which is \textbf{countably infinite}, by mapping words by their lengths to the integers.
 \subsection*{d.}
-
+\qquad $\bigcup C = \{0, 1\}^* = \bigcup_{k=1}^{\infty}A_k$ so cardinality of $(\bigcup C \cup \bigcup_{k=1}^{\infty}A_k)\ \backslash\ \{0, 1\}^*$ is $\boldsymbol{0}$. It is an empty set.
 
 \section*{Answer 2}
-
+\qquad For parts (\textbf{a}) and (\textbf{b}), we can use The Fundamental Principle of Counting.
 \subsection*{a.}
+\begin{center}
+  (number of transition functions) * (number of initial states) * (number of final state sets)\\
+  \bigskip
+  $(4^2)^4 * 4 * (2^4) = \boldsymbol{2^{22}}$
+\end{center}
 
 \subsection*{b.}
+\begin{center}
+  (number of transition relations) * (number of initial states) * (number of final state sets)\\
+  \bigskip
+  $(2^{3*4})^4 * 4 * (2^4) = \boldsymbol{2^{54}}$
+\end{center}
 
 \subsection*{c.}
+\qquad The difference is solely because of the formal definitions of a DFA and NFA. While \textbf{DFA} requires a \textbf{transition function} for each configuration, \textbf{NFA} requires a \textbf{transition relation} and it also transitions empty symbol moves. So at each state of the automaton, there are much more possibilities to account in a NFA.
 
 \subsection*{d.}
+\qquad Every FA corresponds to a regular language, and by using minimization we can produce the same language with an automaton that has fewer states. We also know that every NFA can be converted to DFA through the process of subset construction algorithm. So we can say that the number of different languages M recognizes $L_x$ is less than or equal to the minimum of the number of DFA and the number of NFA, which is always can be taken as number of DFA.
 
+\begin{center}
+  $\boldsymbol{L_x \leq min(2^{54}, 2^{22})}$
+\end{center}
 
 \section*{Answer 3}
 
 
 \subsection*{a.}
+\begin{center}
+  $L_1 = \mathcal{L}(\alpha_1)$ where $\alpha_1$ is $\big((0^*)10(0^*)10(0^*)10(0^*)10(0^*)\big)^*$.
+\end{center}
 
 \subsection*{b.}
-
+\begin{center}
+  $L_2 = \mathcal{L}(\alpha_2)$ where $\alpha_2$ is $\bigg(0\Big(00 \cup \big(01(01)^*00\big)\Big)^*\bigg) \cup \big(1(01)^*\big)$.
+\end{center}
 \subsection*{c.}
-
+\begin{center}
+  $L_3 = \mathcal{L}(\alpha_3)$ where $\alpha_3$ is $\Big(\big(1 \cup 01 \cup 00(1 \cup 01)^*00\big)^*\Big) \cup (e \cup 0)$ and $e$ is empty string.
+\end{center}
 
 
 
 \section*{Answer 4}
 
 \subsection*{a.}
+  \begin{minipage}{0.5\textwidth}
+    \begin {tikzpicture}[shorten >=1pt, node distance = 1.75cm, on grid, auto]
+    \node [state, initial]   (q_0)                 {$q_0$};
+    \node [state]            (q_1) [right =of q_0] {$q_1$};
+    \node [state, accepting] (q_2) [right =of q_1] {$q_2$};
+    \node [state]            (q_3) [below =of q_0] {$q_3$};
+    \node [state]            (q_4) [below =of q_1] {$q_4$};
+    \node [state, accepting] (q_5) [below =of q_2] {$q_5$};
+    \node [state]            (q_6) [below =of q_3] {$q_6$};
+    \node [state]            (q_7) [below =of q_4] {$q_7$};
+    \node [state, accepting] (q_8) [below =of q_5] {$q_8$};
+    \node [state]            (q_9) [below =of q_7] {$q_9$};
+
+    \path [->]
+    (q_0) edge        node {1} (q_1)
+          edge        node {0} (q_3)
+    (q_3) edge        node {1} (q_4)
+          edge        node {0} (q_6)
+    (q_6) edge        node {1} (q_7)
+          edge [swap] node {0} (q_9)
+
+    (q_1) edge node {1} (q_2)
+          edge node {0} (q_4)
+    (q_4) edge node {1} (q_5)
+          edge node {0} (q_7)
+    (q_7) edge node {1} (q_8)
+          edge node {0} (q_9)
+
+    (q_2) edge              node {0} (q_5)
+          edge [loop right] node {1} ()
+    (q_5) edge              node {0} (q_8)
+          edge [loop right] node {1} ()
+    (q_8) edge              node {0} (q_9)
+          edge [loop right] node {1} ()
+
+    (q_9) edge [loop below] node {0, 1} ();
+
+    \end {tikzpicture}
+  \end{minipage}\hfill
+  \begin{minipage}{0.5\textwidth}
+    \begin{align*}
+      K        & = \{q_0, q_1, q_2, q_3, q_4, q_5, q_6, q_7, q_8, q_9\}\\
+      \Sigma   & = \{0, 1\}\\
+      s        & = q_0\\
+      F        & = \{q_2, q_5, q_8\}\\
+      where\ M & = (K, \Sigma, \delta, s, F)
+    \end{align*}
+  \end{minipage}
 
 \subsection*{b.}
+\begin{minipage}{0.5\textwidth}
+  \begin {tikzpicture}[shorten >=1pt, node distance = 1.75cm, on grid, auto]
+  \node [state, initial]   (q_0)                 {$q_0$};
+  \node [state]            (q_1) [right =of q_0] {$q_1$};
+  \node [state]            (q_2) [right =of q_1] {$q_2$};
+  \node [state]            (q_3) [right =of q_2] {$q_3$};
+  \node [state]            (q_4) [below =of q_3] {$q_4$};
+  \node [state, accepting] (q_5) [below =of q_4] {$q_5$};
+  \node [state]            (q_6) [below =of q_0] {$q_6$};
+  \node [state]            (q_7) [below =of q_2] {$q_7$};
+  \node [state, accepting] (q_8) [below =of q_6] {$q_8$};
 
+  \path [->]
+  (q_0) edge                         node {1}    (q_1)
+        edge                         node {0}    (q_6)
+  (q_1) edge [loop above]            node {1}    ()
+        edge                         node {0}    (q_2)
+  (q_2) edge                         node {0}    (q_7)
+        edge                         node {1}    (q_3)
+  (q_3) edge                         node {1}    (q_7)
+        edge                         node {0}    (q_4)
+  (q_4) edge                         node {1}    (q_5)
+        edge                         node {0}    (q_7)
+  (q_5) edge [bend left = 7]         node {0}    (q_8)
+        edge                         node {1}    (q_7)
+  (q_6) edge                         node {1}    (q_1)
+        edge [swap]                  node {0}    (q_7)
+  (q_7) edge [loop below]            node {0, 1} ()
+  (q_8) edge                         node {0}    (q_7)
+        edge [swap, bend right = 25] node {1}    (q_5);
+
+  \end {tikzpicture}
+\end{minipage}\hfill
+\begin{minipage}{0.5\textwidth}
+  \begin{align*}
+    K        & = \{q_0, q_1, q_2, q_3, q_4, q_5, q_6, q_7, q_8\}\\
+    \Sigma   & = \{0, 1\}\\
+    s        & = q_0\\
+    F        & = \{q_5, q_8\}\\
+    where\ M & = (K, \Sigma, \delta, s, F)
+  \end{align*}
+\end{minipage}
 
 
 
@@ -77,30 +192,218 @@ Id Number :  \\
 
 \subsection*{a.}
 
+\begin{align*}
+  (q_0, abaa) \vdash_N (q_2, abaa) \vdash_N (q_2, baa) \vdash_N (q_2, aa) \vdash_N & (q_4, a)\\
+                                                                          \vdash_N & (q_1, e)
+\end{align*}
+$(q_0, abaa) \vdash^*_N (q_1, e)$ and $q_1$ is a final state, so $w_1 = abaa$ is a word N accepts.
+
 \subsection*{b.}
 
+\begin{align}
+&(q_0, babb) \vdash_N (q_1, abb) \ \vdash_N (q_1, bb)\\
+&(q_0, babb) \vdash_N (q_2, babb)  \vdash_N (q_2, abb) \vdash_N (q_2, bb) \vdash_N (q_2, b) \vdash_N (q_2, e)\\
+&(q_0, babb) \vdash_N (q_2, babb)  \vdash_N (q_2, abb) \vdash_N (q_4, bb) \vdash_N (q_4, b) \vdash_N (q_4, e)\\
+&(q_0, babb) \vdash_N (q_3, abb) \ \vdash_N (q_1, bb)\\
+&(q_0, babb) \vdash_N (q_3, abb) \ \vdash_N (q_4, abb) \vdash_N (q_1, bb)\\
+&(q_0, babb) \vdash_N (q_3, abb) \ \vdash_N (q_4, abb) \vdash_N (q_2, bb) \vdash_N (q_2, b) \vdash_N (q_2, e)
+\end{align}\\
 
+\qquad On first, fourth and fifth reads, there are no further configurations. On second, third and sixth reads, the word is completely read but the finishing states are not final states.\\
+
+\qquad We can conclude that $w_2 = babb$ is not a word N accepts.
 
 \section*{Answer 6}
+\qquad Starting state is $q_0$ so we are starting the construction from $q_0$. And $F'$ will be the set of new states that include NFA's accepting states, which are $q_3$ and $q_4$. Let $x, y, z$ be states of the new DFA.
+\begin{align*}
+  E(q_0) = \{q_0, q_2\} = x\\
+  \delta'(x, a) = E(q_0) = x\\
+  \delta'(x, b) = E(q_0) \cup E(q_1) \cup E(q_3) = \{q_0, q_1, q_2, q_3\} = y\\
+  \delta'(y, a) = E(q_0) \cup E(q_4) = \{q_0, q_2, q_3, q_4\} = z\\
+  \delta'(y, b) = E(q_0) \cup E(q_1) \cup E(q_3) = \{q_0, q_1, q_2, q_3\} = y\\
+  \delta'(z, a) = E(q_0) \cup E(q_4) = \{q_0, q_2, q_3, q_4\} = z\\
+  \delta'(z, b) = E(q_0) \cup E(q_1) \cup E(q_3) = \{q_0, q_1, q_2, q_3\} = y\\
+  F' = \{y, z\}
+\end{align*}
+\begin{minipage}{0.5\textwidth}
+  \begin {tikzpicture}[shorten >=1pt, node distance =2cm, on grid, auto]
+  \node [state, initial]   (x)               {$x$};
+  \node [state, accepting] (y) [right =of x] {$y$};
+  \node [state, accepting] (z) [below =of y] {$z$};
 
+  \path [->]
+  (x) edge [loop above] node {a} ()
+      edge              node {b} (y)
+  (y) edge              node {a} (z)
+      edge [loop above] node {b} ()
+  (z) edge [loop below] node {a} ()
+      edge              node {b} (x);
 
+  \end {tikzpicture}
+\end{minipage}\hfill
+\begin{minipage}{0.5\textwidth}
+  \begin{align*}
+    K'         & = \{x, y, z\}\\
+    \Sigma     & = \{a, b\}\\
+    s'         & = x\\
+    F'         & = \{y, z\}\\
+    where\ \ M & = (K', \Sigma, \delta', s', F')
+  \end{align*}
+\end{minipage}
 
 \section*{Answer 7}
+First let's draw the initial GFA where $e$ is empty string, and eliminate states one by one.\\
 
+\begin{minipage}{0.5\textwidth}
+  \begin {tikzpicture}[shorten >=1pt, node distance = 2cm, on grid, auto]
+  \node [state, initial]   (q_4)                 {$q_4$};
+  \node [state]            (q_0) [right =of q_4] {$q_0$};
+  \node [state]            (q_1) [right =of q_0] {$q_1$};
+  \node [state]            (q_2) [below =of q_0] {$q_2$};
+  \node [state]            (q_3) [below =of q_1] {$q_3$};
+  \node [state, accepting] (q_5) [below =of q_4] {$q_5$};
+
+  \path [->]
+  (q_4) edge                  node {$e$}        (q_0)
+  (q_0) edge [swap]           node {a}          (q_3)
+        edge                  node {b}          (q_1)
+  (q_1) edge [loop above]     node {a}          ()
+        edge                  node {a}          (q_3)
+  (q_2) edge [loop below]     node {a $\cup$ b} ()
+        edge                  node {$e$}        (q_5)
+  (q_3) edge [bend left = 10] node {b}          (q_1)
+        edge                  node {b}          (q_2);
+
+  \end {tikzpicture}
+\end{minipage}
+$\rightarrow$
+\begin{minipage}{0.5\textwidth}
+  \begin {tikzpicture}[shorten >=1pt, node distance = 2cm, on grid, auto]
+  \node [state, initial]   (q_4)                 {$q_4$};
+  \node [state]            (q_0) [right =of q_4] {$q_0$};
+  \node [state]            (q_1) [right =of q_0] {$q_1$};
+  \node [state]            (q_2) [below =of q_0] {$q_2$};
+  \node [state, accepting] (q_5) [below =of q_4] {$q_5$};
+
+  \path [->]
+  (q_4) edge              node {$e$}         (q_0)
+  (q_0) edge   [swap]     node {ab}          (q_2)
+        edge              node {b}           (q_1)
+  (q_1) edge [loop above] node {a $\cup$ ab} ()
+        edge              node {ab}          (q_2)
+  (q_2) edge [loop below] node {a $\cup$ b}  ()
+        edge              node {$e$}         (q_5);
+
+  \end {tikzpicture}
+\end{minipage}
+$\rightarrow$
+\begin{minipage}{0.5\textwidth}
+  \vspace{0.5 cm}
+  \begin {tikzpicture}[shorten >=1pt, node distance = 2cm, on grid, auto]
+  \node [state, initial]   (q_4)                 {$q_4$};
+  \node [state]            (q_0) [right =of q_4] {$q_0$};
+  \node [state]            (q_2) [below =of q_0] {$q_2$};
+  \node [state, accepting] (q_5) [below =of q_4] {$q_5$};
+
+  \path [->]
+  (q_4) edge              node {$e$}                      (q_0)
+  (q_0) edge   [swap]     node {ab}                       (q_2)
+        edge [bend left = 10] node {b(a $\cup$ ab)$^*$ab} (q_2)
+  (q_2) edge [loop below] node {a $\cup$ b}               ()
+        edge              node {$e$}                      (q_5);
+
+  \end {tikzpicture}
+\end{minipage}
+$\rightarrow$
+\begin{minipage}{0.5\textwidth}
+  \vspace{0.5 cm}
+  \begin {tikzpicture}[shorten >=1pt, node distance = 2cm, on grid, auto]
+  \node [state, initial]   (q_4)                 {$q_4$};
+  \node [state]            (q_0) [right =of q_4] {$q_0$};
+  \node [state]            (q_2) [below =of q_0] {$q_2$};
+  \node [state, accepting] (q_5) [below =of q_4] {$q_5$};
+
+  \path [->]
+  (q_4) edge              node {$e$}                            (q_0)
+  (q_0) edge              node {ab $\cup$ b(a $\cup$ ab)$^*$ab} (q_2)
+  (q_2) edge [loop below] node {a $\cup$ b}                     ()
+        edge              node {$e$}                            (q_5);
+
+  \end {tikzpicture}
+\end{minipage}
+$\rightarrow$
+\begin{minipage}{0.5\textwidth}
+  \vspace{0.5 cm}
+  \begin {tikzpicture}[shorten >=1pt, node distance = 2cm, on grid, auto]
+  \node [state, initial]   (q_4)                 {$q_4$};
+  \node [state]            (q_0) [right =of q_4] {$q_0$};
+  \node [state, accepting] (q_5) [below =of q_4] {$q_5$};
+
+  \path [->]
+  (q_4) edge node {$e$}                                            (q_0)
+  (q_0) edge node {ab $\cup$ b(a $\cup$ ab)$^*$ab(a $\cup$ b)$^*$} (q_6);
+
+  \end {tikzpicture}
+\end{minipage}
+$\rightarrow$
+\begin{minipage}{0.5\textwidth}
+  \vspace{0.5 cm}
+  \begin {tikzpicture}[shorten >=1pt, node distance = 2cm, on grid, auto]
+  \node [state, initial]   (q_4)                 {$q_4$};
+  \node [state, accepting] (q_5) [below =of q_4] {$q_5$};
+
+  \path [->]
+  (q_4) edge node {ab $\cup$ b(a $\cup$ ab)$^*$ab(a $\cup$ b)$^*$} (q_5);
+
+  \end {tikzpicture}
+\end{minipage}
+\begin{center}
+  \vspace{0.3 cm}
+  So, \textbf{R} = ab $\cup$ b(a $\cup$ ab)$^*$ab(a $\cup$ b)$^*$
+\end{center}
 
 
 \section*{Answer 8}
+\qquad If $0$ and $1$ are elements of an alphabet $\Sigma$, then we can say that they are regular expressions since we know that each member of the alphabet $\Sigma$ is a regular expression. They can be shown as $\mathcal{L}(0)$ and $\mathcal{L}(1)$. If $L$ is a regular language then we can show it as $\mathcal{L}(L)$, too. Using the definition of regular expression we can conclude $H = \mathcal{L}(0)\mathcal{L}(L)\mathcal{L}(1)$. $H$ is a regular language.
 
+\newpage
+\qquad We can define a new transition relation $\delta'$ for the new FA such that the initial state $q_0$ yields $M_L$'s initial state with input 0, and $M_L$'s all final states yields $q_1$ with input 1. Assume K is the set of states for FA $M_L$\\
+\begin{minipage}{0.5\textwidth}
+  \vspace{0.5 cm}
+  \begin {tikzpicture}[shorten >=1pt, node distance = 2cm, on grid, auto]
+  \node [state, initial]   (q_0)                 {$q_0$};
+  \node [state, rectangle] (q_2) [right =of q_0] {$M_L$};
+  \node [state, accepting] (q_1) [right =of q_2] {$q_1$};
 
+  \path [->]
+  (q_0) edge node {0} (q_2)
+  (q_2) edge node {1} (q_1);
+  \end {tikzpicture}
+\end{minipage}\hfill
+\begin{minipage}{0.5\textwidth}
+  \begin{align*}
+    M_H   & = (\{q_0, q_1\} \cup K, \Sigma, \delta', q_0, q_1)
+  \end{align*}
+\end{minipage}\hfill
+\vspace{0.5 cm}
+
+\qquad With state elimination we find $M_H = 0M_L1$; so $L(0M_L1) = 0w1$ where $w \in \Sigma^*$ and is accepted by $M_L$ and $M_H = H$.
 
 \section*{Answer 9}
-
 \subsection*{a.}
 
+\qquad Assume $L$ is regular and let $p$ be its pumping length. $w \in L$ where $w = 1^t0^p1^{2^{p+p!}}$ and $|w|\geq p$. Using pumping lemma we can divide $w$ as $xyz$ where $x=1^t0^a, y=0^b, z=0^c1^{2^{p+p!}}$ and as pummping lemma specifies $b \geq 1$ with $a+b+c = p$.\\
 
+\qquad Now, examine the string $w' = xy^{i+1}z$ where $i = \frac{p!}{b}$. (Note that $p!$ is divisible by $b$ since it contains $b$ as a factor.) Then $y^i = 0^{p!}$, $y^{i+1} = 0^{p!+b}$. Now we have,
+\begin{center}
+  $w' = 1^t0^{p!+a+b+c}1^{2^{p+p!}} = 1^t0^{p!+p}1^{2^{p+p!}}$.
+\end{center}
+
+\qquad We know that $w' \notin L$ since $p+p! = p!+p$ and thus this is a contradiction. We conclude that $L$ is not a regular language by pumping lemma.
 
 
 \end{document}
 
 ​
 
+ 
