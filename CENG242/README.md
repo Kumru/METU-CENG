@@ -4,4 +4,4 @@
 
 **C++**
 * the3: Formula 1 championship simulation.
-* the4: Board game simulation.
+* the4: Board game simulation. Tester written by me can be accessed from [here.](https://github.com/cahity/PL-HW4-Tester)
