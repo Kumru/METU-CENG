@@ -65,9 +65,9 @@ module RgbRAM (input Mode,input [3:0] RamAddress, input [23:0] RamDataIn,
                 end
                 5:
                 begin
-                    if(RamDataIn[7:0] < 255) RAM[RamAddress][7:0] <= RamDataIn[7:0] + 1;
-                    if(RamDataIn[15:8] < 255) RAM[RamAddress][15:8] <= RamDataIn[15:8] + 1;
-                    if(RamDataIn[23:16] < 255) RAM[RamAddress][23:16] <= RamDataIn[23:16] + 1;
+                    if(RamDataIn[7:0] != 255) RAM[RamAddress][7:0] <= RamDataIn[7:0] + 1;
+                    if(RamDataIn[15:8] != 255) RAM[RamAddress][15:8] <= RamDataIn[15:8] + 1;
+                    if(RamDataIn[23:16] != 255) RAM[RamAddress][23:16] <= RamDataIn[23:16] + 1;
                 end
                 6:
                 begin

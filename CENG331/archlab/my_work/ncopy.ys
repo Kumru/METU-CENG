@@ -1,0 +1,247 @@
+#/* $begin ncopy-ys */
+##################################################################
+# ncopy.ys - Copy a src block of len words to dst.
+# Return the number of positive words (>0) contained in src.
+#
+# Include your name and ID here.
+#
+# Yasar Cahit Yildirim / 2310647
+#
+# Describe how and why you modified the baseline code.
+#
+# I tried a lot of things but I will explain the latest and 
+# most efficient one, which takes 60 frequently. iaddq instruction
+# is included in pipe-full file.
+#
+# This homework would be lot nicer if we could add our own
+# instructions definitions such as a mrmov instruction that
+# updates registers too. But that would require us to
+# change the *.c files also.
+#
+# First, I unrolled the loop to a factor 10. (Slides) Further unrolling
+# exceeds the expected program length. While doing the unrolling,
+# I scheduled the instructions so that no stalling or inserting
+# bubbles can happen. Generally, I do the memory accesses first as
+# a batch and then do the necessary checks after. I check if a
+# number is negative by anding it by itself. These techniques
+# gives me great performance benefit.
+# Second part, i.e. leftover loop is way more complicated to
+# explain.
+#
+# In the second part, I used a jump table to overcome the overhead
+# of the loop variable. This jump table consists of labels that
+# corresponds to different results of len%10. Also these labels
+# has their sub-labels so that if we are coming from a higher
+# label, we can optimize one read. (If we mispredict, that
+# optimization is lost too but a win is a win.) The real hacky
+# and beautiful part of the jump table is that we are using the fact
+# that if (len-10) is negative, we are jumping to a label that is
+# offsetted negatively to start of the jump table. Also, since
+# a quad is 8 bytes, we need to multiply our offset by 8 so we
+# add %rdx to itself 3 times. ((%rdx*2)*2)*2 is %rdx*8 so we
+# accomplish what we want with this trick.
+#
+# In the first part, I used 4 registers because it is not needed to
+# use more since they get unused. And finally, in the entrance of
+# the jump table, I preread the first 2 bytes in order to save some
+# instruction space from the end of the jump table. Without that,
+# 1000 bytes is exceeded.
+#
+# P.S.: I had to delete .align 8 command in order to reduce size.
+# That is not a problem because our addresses are already 8 bytes.
+#
+##################################################################
+# Do not modify this portion
+# Function prologue.
+# %rdi = src, %rsi = dst, %rdx = len
+ncopy:
+
+##################################################################
+# You can modify this portion
+	iaddq $-9, %rdx
+	jle HACKJUMP
+
+UNROLL10:
+	mrmovq (%rdi), %r8
+	mrmovq 8(%rdi), %r9
+	mrmovq 16(%rdi), %r10
+	mrmovq 24(%rdi), %r11
+	rmmovq %r8, (%rsi)
+	rmmovq %r9, 8(%rsi)
+	andq %r8, %r8
+	jle F1
+	iaddq $1, %rax
+
+F1:
+	rmmovq %r10, 16(%rsi)
+	rmmovq %r11, 24(%rsi)
+	andq %r9, %r9
+	jle F2
+	iaddq $1, %rax
+
+F2:
+	mrmovq 32(%rdi), %r8
+	mrmovq 40(%rdi), %r9
+	andq %r10, %r10 
+	jle F3
+	iaddq $1, %rax
+
+F3:
+	rmmovq %r8, 32(%rsi)
+	rmmovq %r9, 40(%rsi)
+	andq %r11, %r11
+	jle F4
+	iaddq $1, %rax
+
+F4:
+	mrmovq 48(%rdi), %r10
+	mrmovq 56(%rdi), %r11
+	andq %r8, %r8
+	jle F5
+	iaddq $1, %rax
+
+F5:
+	mrmovq 64(%rdi), %r8
+	andq %r9, %r9
+	mrmovq 72(%rdi), %r9
+	jle F6
+	iaddq $1, %rax
+
+F6:
+	rmmovq %r10, 48(%rsi)
+	rmmovq %r11, 56(%rsi)
+	andq %r10, %r10
+	jle F7
+	iaddq $1, %rax
+
+F7:
+	rmmovq %r8, 64(%rsi)
+	rmmovq %r9, 72(%rsi)
+	andq %r11, %r11
+	jle F8
+	iaddq $1, %rax
+
+F8:
+	andq %r8, %r8
+	jle F9
+	iaddq $1, %rax
+
+F9:
+	andq %r9, %r9
+	jle UNROLLDONE
+	iaddq $1, %rax
+
+UNROLLDONE:
+	iaddq $80,  %rdi
+	iaddq $80,  %rsi
+
+TEST_UNROLL:
+	iaddq $-10, %rdx
+	jg UNROLL10
+
+
+
+HACKJUMP:
+	addq %rdx, %rdx
+	addq %rdx, %rdx
+	addq %rdx, %rdx
+	mrmovq HACKTABLE(%rdx), %rdx
+	mrmovq  (%rdi), %r14
+	mrmovq 8(%rdi), %r13
+	pushq %rdx
+	ret
+
+	.quad Done
+	.quad REMAIN1
+	.quad REMAIN2
+	.quad REMAIN3
+	.quad REMAIN4
+	.quad REMAIN5
+	.quad REMAIN6
+	.quad REMAIN7
+	.quad REMAIN8
+HACKTABLE:
+	.quad REMAIN9
+
+REMAIN9:
+	mrmovq 64(%rdi), %r9
+	mrmovq 56(%rdi), %r8
+	andq %r9, %r9
+	rmmovq %r9, 64(%rsi)
+	jle R8_FROM9
+	iaddq $1, %rax
+
+REMAIN8:
+	mrmovq 56(%rdi), %r8
+R8_FROM9:
+	mrmovq 48(%rdi), %r9
+	andq %r8, %r8
+	rmmovq %r8, 56(%rsi)
+	jle REMAIN7
+	iaddq $1, %rax
+
+REMAIN7:
+	mrmovq 48(%rdi), %r9
+R7_FROM8:
+	mrmovq 40(%rdi), %r8
+	rmmovq %r9, 48(%rsi)
+	andq %r9, %r9
+	jle R6_FROM7
+	iaddq $1, %rax
+
+REMAIN6:
+	mrmovq 40(%rdi), %r8
+R6_FROM7:
+	mrmovq 32(%rdi), %r9
+	rmmovq %r8, 40(%rsi)
+	andq %r8, %r8
+	jle R5_FROM6
+	iaddq $1, %rax
+
+REMAIN5:
+	mrmovq 32(%rdi), %r9
+R5_FROM6:
+	mrmovq 24(%rdi), %r8
+	rmmovq %r9, 32(%rsi)
+	andq %r9, %r9
+	jle R4_FROM5
+	iaddq $1, %rax
+
+REMAIN4:
+	mrmovq 24(%rdi), %r8
+R4_FROM5:
+	mrmovq 16(%rdi), %r9
+	rmmovq %r8, 24(%rsi)
+	andq %r8, %r8
+	jle R3_FROM4
+	iaddq $1, %rax
+
+REMAIN3:
+	mrmovq 16(%rdi), %r9
+R3_FROM4:
+	rmmovq %r9, 16(%rsi)
+	andq %r9, %r9
+	jle REMAIN2
+	iaddq $1, %rax
+
+REMAIN2:
+	rmmovq %r13, 8(%rsi)
+	andq %r13, %r13
+	jle REMAIN1
+	iaddq $1, %rax
+
+REMAIN1:
+	rmmovq %r14, (%rsi)
+	andq %r14, %r14
+	jle Done
+	iaddq $1, %rax
+
+##################################################################
+# Do not modify the following section of code
+# Function epilogue.
+Done:
+	ret
+##################################################################
+# Keep the following label at the end of your function
+End:
+#/* $end ncopy-ys */

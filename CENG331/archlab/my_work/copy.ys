@@ -1,0 +1,44 @@
+# Yasar Cahit Yildirim 2310647
+# Execution begins at address 0
+	.pos 0
+init:
+	irmovq stack, %rsp  	# Set up stack pointer
+	call main		# Execute main program
+	halt			# Terminate program
+
+.align 8			# Source block
+src:
+	.quad 0x00a
+	.quad 0x0b0
+	.quad 0xc00
+dest:				# Destination block
+	.quad 0x111
+	.quad 0x222
+	.quad 0x333
+
+main:		
+	irmovq src, %rdi	# src is first parameter
+	irmovq dest, %rsi	# dest is second paramete
+	irmovq $3, %rdx		# len is third argument
+	irmovq $8, %r8		# Keep 8 for moving one byte
+	irmovq $1, %r9		# Keep one for decrementing
+	call copy		# Call the copy function
+	ret			# return to 	
+
+copy:
+	xorq %rax,%rax		# Clear %rax to 0
+loop:
+	andq %rdx,%rdx 		# Check if len became zero
+	je end			# End if true
+	mrmovq (%rdi),%rcx	# Read from src
+	rmmovq %rcx,(%rsi)	# Write into dest
+	xorq %rcx,%rax 		# Xor with rax
+	addq %r8, %rdi		# Increment src one byte
+	addq %r8, %rsi		# Increment dest one byte
+	subq %r9, %rdx		# Decrement len by one
+	jmp loop		# Loop again
+end:
+	ret			# return to main
+
+	.pos 0x200
+stack:

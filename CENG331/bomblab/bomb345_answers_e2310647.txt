@@ -1,0 +1,7 @@
+My text is We have to stand with our North Korean allies.
+1 1 2 6 24 120
+1 2 828
+87 20 DrEvil
+7 47
+5 1 6 2 4 3
+107
