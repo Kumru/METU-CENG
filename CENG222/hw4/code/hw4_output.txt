@@ -1,0 +1,4 @@
+%                     partC_X_A = 3.3560           partD_stdX_A = 2.2552
+% partA = 0.28277     partC_Y_A = 0.0000049794     partD_stdY_A = 0.0000033280
+% partB = 0.74983     partC_X_B = 344951.32590     partD_stdX_B = 81599.13908
+%                     partC_Y_B = 0.50491          partD_stdY_B = 0.0070984

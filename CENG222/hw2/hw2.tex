@@ -1,0 +1,231 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage{amsmath}
+
+
+\usepackage{multirow}
+\usepackage{listings}
+\usepackage{xcolor}
+
+
+\usepackage[hmargin=3cm,vmargin=6.0cm]{geometry}
+\topmargin=-2cm
+\addtolength{\textheight}{6.5cm}
+\addtolength{\textwidth}{2.0cm}
+\setlength{\oddsidemargin}{0.0cm}
+\setlength{\evensidemargin}{0.0cm}
+\usepackage{indentfirst}
+\usepackage{amsfonts}
+
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstset{
+    language=Python,
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+
+
+\begin{document}
+
+\section*{Student Information}
+
+Name : Yaşar Cahit Yıldırım \\
+
+ID : 2310647 \\
+
+
+\section*{Answer 1}
+\subsection*{a)}
+
+Expectation is a weighted sum of probabilities. So, with the help of law of total probability, the expectation function of random variable $X$ can be expressed as:
+$$\textbf{E}(X) = \sum_{x} x\sum_{y} P(x, y) = \sum_{x} x\big(P(x, 0) + P(x, 2)\big)$$
+$$\textbf{E}(X) = 0*\big(P(0, 0) + P(0, 2)\big) + 1*\big(P(1, 0) + P(1, 2)\big) + 2*\big(P(2, 0) + P(2, 2)\big) = 1$$
+\newline
+
+Variance is the variability or the distance of the values of random variables from their expected values.
+$$\text{Var}(X) = \sum_{x} (\mu - x)^2 \sum_{y} P(x, y) = \sum_{x} (\mu - x)^2 \big(P(x, 0) + P(x, 2)\big)$$
+$$\text{Var}(X) = (0-1)^2*\big(P(0, 0) + P(0, 2)\big) + (1-1)^2*\big(P(1, 0) + P(1, 2)\big) + (2-1)^2*\big(P(2, 0) + P(2, 2)\big) = 1/2$$
+
+\subsection*{b)}
+
+Let $Z$ denote $X+Y$. Probability mass function of $Z$ is sum of probabilities $P(x, y)$ where $z = x + y$.
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c||c|c|c|c|c|}
+    \hline
+        \multirow{2}{*}{$P(z)$} & \multicolumn{5}{c|}{$z$}                                     \\
+        \cline{2-6}
+                              & 0    & 1    & 2                              & 3    & 4    \\
+        \cline{2-6}
+                              & 1/12 & 4/12 & 3/12                           & 2/12 & 2/12 \\
+        \hline
+        \shortstack{ \\ $x, y$ \\ pair } & 0, 0 & 1, 0 & \shortstack{ \\ 0, 2 \\ 2, 0 } & 1, 2 & 2, 2 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\newpage
+
+\subsection*{c)}
+
+Covariance is the relative relation between two random variables.
+$$\text{Cov}(X, Y) = \textbf{E}(XY) - \textbf{E}(X)\textbf{E}(Y) = \sum_{x}\sum_{y}xyP(x, y) - \textbf{E}(X)\textbf{E}(Y)$$
+
+We know \textbf{E}(X) from \textbf{(a)}. Calculating \textbf{E}(Y) with the same method gives us:
+$$\textbf{E}(Y) = 0*\big(P(0, 0) + P(1, 0) + P(2, 0)\big) + 2*\big(P(0, 2) + P(1, 2) + P(2, 2)\big) = 1$$
+
+Since the rows and columns where either $x$ or $y$ is $0$ will be $0$, those multiplications are omitted from the equation for the sake of simplicity.
+$$\text{Cov}(X, Y) = 1*2*P(1, 2) + 2*2*P(2, 2) - \textbf{E}(X)*\textbf{E}(Y)$$
+$$\text{Cov}(X, Y) = 1*2*(2/12) + 2*2*(2/12) - 1 * 1 = 0$$
+
+\subsection*{d)}
+
+From the $\textbf{Properties of expectations, pg.49}$, we know that:
+$$\text{If $X$ and $Y$ are independent then } \textbf{E}(XY) = \textbf{E}(X)\textbf{E}(Y).$$
+
+So, substituting that to the equation of covariance as:
+$$\text{Cov}(X, Y) = \textbf{E}(XY) - \textbf{E}(X)\textbf{E}(Y) = \textbf{E}(X)\textbf{E}(Y) - \textbf{E}(X)\textbf{E}(Y) = 0$$
+
+\subsection*{e)}
+Let us give a counterexample to show non-independence. Such as:
+$$P(x, y) \neq P(x)P(y) \text{ for some x, y.}$$
+
+$$P(X = 0, y) = P(0, 0) + P(0, 2) = 1/12 + 2/12 = 3/12$$
+$$P(x, Y = 0) = P(0, 0) + P(1, 0) + P(2, 0) = 1/12 + 4/12 + 1/12 = 6/12$$
+
+$$P(0, 0) = 1/12 \boldsymbol\neq P(X = 0)*P(Y = 0) = 3/12*6/12 = 1/8$$
+
+So, this shows that $X$ and $Y$ are non-independent.
+
+\newpage
+
+\section*{Answer 2}
+Let us consider being broken as a successful outcome for this question.
+
+\subsection*{a)}
+We will use Binomial Distribution with $12$ trials, at least $3$ successes, probability of success as $0.2$ and probability of failure as $1-0.2 = 0.8$.
+$$P(X \geq 3) = 1  - P(X < 3)$$
+$$P(X < 3) = P(X = 0) + P(X = 1) + P(X = 2)$$
+
+$$P(X = 0) = \binom{12}{0}*(0.2)^{0}*(0.8)^{12-0} = 0.0687$$
+$$P(X = 1) = \binom{12}{1}*(0.2)^{1}*(0.8)^{12-1} = 0.2062$$
+$$P(X = 2) = \binom{12}{2}*(0.2)^{2}*(0.8)^{12-2} = 0.2835$$
+
+$$P(X < 3) = 0.0687 + 0.2062 + 0.2835 = 0.5584$$
+$$P(X \geq 3) = 1  - 0.5584 = 0.4416$$
+\subsection*{b)}
+
+We will use Negative Binomial Distribution with $2$nd success at $5$th trial, probability of success as $0.2$ and probability of failure as $1-0.2 = 0.8$.
+
+$$P(2) = \binom{5-1}{2-1}(0.8)^{5-2}(0.2)^{2} = \binom{4}{1}(0.8)^{3}(0.2)^{2} = 0.08192$$
+
+\subsection*{c)}
+
+Since we know the number of successes and try to find the average number of trials, we will use $\textbf{E}(X)$ of Negative Binomial Distribution. Number of successes is $4$ and probability of success is $0.2$.
+$$\textbf{E}(X) = \frac{k}{p} = \frac{4}{0.2} = 20$$
+
+\newpage
+
+\section*{Answer 3}
+
+We will use Poisson Distribution with unit period $4$ hours and $\lambda$ as $1$ call. Number of events occuring is phone calls.
+
+\vspace{1.5cm}
+
+\subsection*{a)}
+
+Since unit period for this part is $2$, $\lambda$ is now $0.5$ from the equality $\frac{2}{4} = \frac{\lambda}{1}$ and the number of calls is $0$.
+
+$$P(X = 0) = \frac{(0.5)^{0}*e^{-0.5}}{0!} = 0.6065$$
+
+\vspace{1.5cm}
+
+\subsection*{b)}
+
+Unit period for this part is 10 hours, so $\lambda$ is now $2.5$ from the equality $\frac{10}{4} = \frac{\lambda}{1}$ and the number of calls is $\leq 3$.
+
+\begin{align*}
+P(X \leq 3) &= P(X = 0) + P(X = 1) + P(X = 2) + P(X = 3) \\
+            &=  \frac{(2.5)^{0}*e^{-2.5}}{0!} + \frac{(2.5)^{1}*e^{-2.5}}{1!} + \frac{(2.5)^{2}*e^{-2.5}}{2!} + \frac{(2.5)^{3}*e^{-2.5}}{3!} \\
+            &= 0.0821 + 0.2052 + 0.2565 + 0.2138 \\
+            &= 0.7576
+\end{align*}
+
+\vspace{1.5cm}
+
+\subsection*{c)}
+There will be two solutions proposed, both with the same answer. Just for the sake of stronger argument and FUN. \\
+
+\newpage
+
+
+$\textbf{Bayes' theorem}$ \\
+
+For the 10 hour unit period, the $\lambda$ is $2.5$; and for the 16 hour unit period, the $\lambda$ is $4$.
+\begin{center}
+    Let $A$ denote: Bob did not get more than $3$ phone calls for the first $16$ hours. \\
+    Let $B$ denote: Bob did not get more than $3$ phone calls for the first $10$ hours.
+\end{center}
+
+$$P(A|B) = \frac{P(B|A)P(A)}{P(B)}$$
+
+It is straightforward that if Bob got at most $3$ calls in the first $16$ hours, he must have got at most $3$ calls in the first 10 hours too, thus $P(B|A) = 1$. $P(B)$ is equal to the result of \textbf{(b)}.
+
+\begin{align*}
+P(A \leq 3) &= P(A = 0) + P(A = 1) + P(A = 2) + P(A = 3) \\
+            &=  \frac{(4)^{0}*e^{-4}}{0!} + \frac{(4)^{1}*e^{-4}}{1!} + \frac{(4)^{2}*e^{-4}}{2!} + \frac{(4)^{3}*e^{-4}}{3!} \\
+            &= 0.0183 + 0.0733 + 0.1465 + 0.1954 \\
+            &= 0.4335
+\end{align*}
+
+$$P(A|B) = \frac{1*(0.4335)}{0.7576} = 0.5722$$
+
+
+$\textbf{A python way}$ \\
+
+For every case of first $10$ hours, there exists some cases for the $6$ hours after that. Sum of conditional probabilities of these is the answer.
+
+\begin{center}
+    Let $P(X)$ denote the question itself. $P(B)$ is the answer from $\textbf{(b)}$ since it is given.\\
+    Let $A_i$ denote: Bob did not get more than $i$ phone calls for the first $10$ hours. \\
+    Let $B_j$ denote: Bob did not get more than $j$ phone calls for the last $\ 6$ hours.
+\end{center}
+
+$$P(X) = \sum_{i}\sum_{j}\frac{P(A_i\cap B_j)}{P(B)}\text{ where } i+j \leq 3.$$
+
+\begin{lstlisting}
+result = 0
+for i in range(4): # 0 to 3 inclusive
+    prob_first_10 = poisson(10/4, i) # Case of i calls from first 10 hours
+
+    for j in range(4-i): # Remaining calls for last 6 hours
+        prob_last_6 = poisson(6/4, j) # Case of j calls from remaining 6 hours
+        result += prob_first_10 * prob_last_6
+        # Sum of probabilities of i calls in 10 hours, j calls in 6 hours
+
+result /= b_answer # Given 10 hours condition is true
+# Result: 0.5722
+\end{lstlisting}
+Note: Variable $b\_answer$ is the answer from $\textbf{(b)}$. $Poisson$ function is defined as $poisson(lambda, x)$.
+
+\end{document}
+

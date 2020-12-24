@@ -1,0 +1,111 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{indentfirst}
+\usepackage{listings}
+\usepackage{geometry}
+\usepackage{xcolor}
+
+% GEOMETRY %
+    \addtolength{\textheight}{6.5cm}
+    \addtolength{\textwidth}{2.2cm}
+    \setlength{\oddsidemargin}{0.0cm}
+    \setlength{\evensidemargin}{0.0cm}
+    \setlength{\topmargin}{-1.5cm}
+
+\lstset{
+    language = matlab,
+    frame = single,
+    basicstyle = \ttfamily, tabsize = 2,
+    numbersep=3mm, numbers=left, numberstyle=\small,
+    backgroundcolor = \color[rgb]{0.9, 0.9, 0.9},
+    commentstyle    = \color[rgb]{0, 0.6, 0},
+    keywordstyle    = \color[rgb]{0.7, 0, 0}
+}
+
+\title{
+    \vspace{4cm}
+    \huge\textbf{Statistical Methods for Computer Engineering} \\
+    \huge Homework 4 Report
+}
+\author{
+    \Large Yaşar Cahit Yıldırım \\
+    \Large 2310647
+}
+\date{}
+
+\begin{document}
+    \maketitle
+    \newpage
+    
+    % DOCUMENT %
+    \section*{\hfil Report \hfil}
+    
+        Before starting the Monte Carlo study, we should estimate a threshold value which will denote the minimum number of simulations in order to have the confident answers we want. We want to be $98\%$ confident in our estimates with the maximum error of $0.03$. So deciding that $\alpha = 0.02$ and $\epsilon = 0.03$, with the lack of an intelligent preliminary estimate, we can calculate this threshold $N$ as:
+
+        $$N \geq 0.25\Big(\frac{z_{\alpha/2}}{\epsilon}\Big)^2 = 0.25\Big(\frac{2.236}{0.03}\Big)^2 = 1502.8544$$
+
+        We can choose $N$ as any integer that is higher than the threshold found. We can choose, for example, the first integer that is bigger than the value found, i.e. $1503$ or the first prime number that is bigger than the value found, i.e. $1511$. Let us simply choose $1503$ to be able to show the calculation steps in the running code.
+
+        % Let us choose the first integer that is bigger than the value found, i.e. 1503.
+
+        \subsection*{Part A}
+            After creating a random symmetric graph with the probability of elements being compatible is $0.012$, we can calculate the number of triangles with the formula that has been given to us. For the first shipment to have at most one choice, triangle count of at most one, i.e. less than two, is needed. So, \textit{simulations that has less than two triangles} divided by \textit{the number of simulations} is the answer.
+            The answer, estimated by my simulation in a test run, is as: $0.28277$.
+
+
+        \subsection*{Part B}
+            Number of triangles with the graph created by probability $0.79$ can be calculated as \textbf{Part A}. For the ratio of triangles to triplets, where triplet count is determined by choosing three items out of number of goods available in that simulation, we divide the triangle count of every simulation to the triplet count. So, \textit{simulations that has a ratio more than half} divided by \textit{the number of simulations} is the answer.
+            The answer, estimated by my simulation in a test run, is as: $0.74983$.
+
+        
+        \subsection*{Part C}
+            \noindent Estimated $X$ is the mean of distinct triangles on all simulations. \\
+            Estimated $Y$ is the mean of ratios of distinct triangles to triplets on all simulations.\\
+
+            \begin{minipage}{0.45\textwidth}
+                \textbf{First Scenario} \\
+                $X$ is, estimated in a test run, as: $3.3560$. \\
+                $Y$ is, estimated in a test run, as: $4.9794 \times 10^{-6}$.
+            \end{minipage}
+            \hfill \vline \hfill
+            \begin{minipage}{0.45\textwidth}
+                \textbf{Second Scenario} \\
+                $X$ is, estimated in a test run, as: $344951.32590$. \\
+                $Y$ is, estimated in a test run, as: $0.50491$.
+            \end{minipage}
+
+            
+        
+        \subsection*{Part D}
+            \noindent Estimated $Std(X)$ is the standart deviation of distinct triangles on all simulations. \\
+            Estimated $Std(Y)$ is the standart deviation of ratios of distinct triangles to triplets on all simulations.\\
+            
+            \begin{minipage}{0.45\textwidth}
+                \vspace{-1.32cm}
+                \textbf{First Scenario} \\
+                $Std(X)$ is, estimated in a test run, as: $2.2552$. \\
+                $Std(Y)$ is, estimated in a test run, as: $3.3280 \times 10^{-6}$.\\
+                
+                Since estimated $X$ is bigger by more than one estimated $Std(X)$ from $0$ and $1$, low percentage in \textbf{Part A} is not a surprise.\\
+                Because related graph is sparse and Poisson Variable is high i.e. possible triplets is high, estimated $Y$ -also $Std(Y)$- to be really small is expected as well.
+            \end{minipage}
+            \hfill \vline \hfill
+            \begin{minipage}{0.45\textwidth}
+                \textbf{Second Scenario} \\
+                $Std(X)$ is, estimated in a test run, as: $81599.13908$. \\
+                $Std(Y)$ is, estimated in a test run, as: $0.0070984$. \\
+
+                Estimated $Y$ is higher than $50\%$ and estimated $Std(Y)$ is small relative to it, so most of the first standart deviation is higher than $50\%$ too. Thus, high percentage in \textbf{Part B} is meaningful.\\
+                In a dense graph, a good can participate in a lot of triangles with combinations of other goods. Estimated $X$ to be very big on a dense graph is, then, logical. In the same way, small number of changes in compatibility of goods can affect a lot of triangles. So, $Std(X)$ to be big is also accurate.
+
+            \end{minipage}
+
+    
+    % DOCUMENT %
+    
+    \newpage
+    \section*{Code}
+        \lstinputlisting{../code/hw4.m}
+    \section*{Example Output}
+        \lstinputlisting{../code/hw4_output.txt}
+\end{document}
